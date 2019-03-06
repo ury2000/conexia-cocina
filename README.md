@@ -20,6 +20,9 @@ En la raiz del directorio usar: mvn package
 Se utilizó Wildfly, se debe configurar el JDNI para la conexión a la BD en la consola de administración del Wildfly. 
 Desplegar el war en cualquier contenedor JEE. Recordar configurar previamnte el DataSource.
 
+·Configurar Driver WildFly
+https://medium.com/mitchtalmadge/install-the-postgresql-jdbc-driver-on-wildfly-10-12159ce3c52c
+
 Todo Hecho
 Gracias!
 
