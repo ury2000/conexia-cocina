@@ -113,7 +113,7 @@ td .ui-button, td button.ui-button.ui-state-default, td .ui-button.ui-state-defa
     background: none repeat scroll 0 0 #FFFFFF;
     /*border-bottom: 1px solid #0162B1;*/
     height: 60px;
-    box-shadow: 2px 2px 9px 0px #172731;
+    box-shadow: 2px 2px 9px 0 #172731;
 }
 
 .menu-content {
@@ -175,9 +175,9 @@ html, body {
 .page-wrap {
     height: auto;
     margin: 0 auto 0;
-    border: 0px !important;
+    border: 0 !important;
     /*background-color: #D7D7D8;*/
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 /*.page-content {*/
