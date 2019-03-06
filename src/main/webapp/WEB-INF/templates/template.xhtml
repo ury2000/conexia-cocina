@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: yury
+  Date: 4/03/19
+  Time: 21:26
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </f:facet>
+    <title>Cocina</title>
+    <link rel="shorcut icon" href="#{request.contextPath}/favicon.ico" type="image/x-icon"/>
+</h:head>
+
+<h:body>
+    <h:panelGroup layout="block" id="content" styleClass="page-content">
+        <div class="header">
+            <div class="logo_grafica">
+                <div class="logo">
+                    <h:graphicImage library="images" name="logo.png"
+                                    styleClass="img_logo"/>
+                </div>
+                <div class="grafica"><h:graphicImage library="images" height="60" name="grafica.jpg"
+                /></div>
+            </div>
+            <!-- MENU -->
+            <ui:include src="menuBar.xhtml"/>
+        </div>
+
+        <h:panelGroup layout="block" styleClass="page-wrap">
+            <!--<pe:tooltip value="Resultados por página" myPosition="left center"-->
+            <!--atPosition="right center" for="@(.ui-paginator-rpp-options)" />-->
+            <div class="ui-module-container">
+                <ui:insert name="centerContent"/>
+            </div>
+        </h:panelGroup>
+    </h:panelGroup>
+
+    <!--<div id="footer" class="site-footer">-->
+    <!--<p align="left" class="footer_text"-->
+    <!--style="display: inline-block; margin-left: 5px; vertical-align: top;">-->
+    <!--La mejor cocina.</p>-->
+
+    <!--<p style="float: right; margin-right: 10px" class="footer_text">-->
+    <!--Bogotá &#169;2019-->
+    <!--</p>-->
+    <!--</div>-->
+
+    <!-- CSS y JS of SOFTEXT-->
+    <!--<h:outputStylesheet library="css" name="app.css"/>-->
+    <h:outputStylesheet library="css" name="template.css"/>
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <div style="text-align: center">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/></div>
+    </p:confirmDialog>
+    <p:tooltip/>
+</h:body>
+
+</html>

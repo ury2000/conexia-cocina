@@ -1,0 +1,13 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:components="http://java.sun.com/jsf/composite/components">
+
+    <ui:define name="module-content">
+        <!--<p:tooltip/>-->
+        <components:person-insert saveAction="#{cocineroSaveView.guardar}"
+                                  tittle="#{cocineroSaveView.tittle}"
+                                  person="#{cocineroSaveView.cocinero}"/>
+    </ui:define>
+</ui:composition>

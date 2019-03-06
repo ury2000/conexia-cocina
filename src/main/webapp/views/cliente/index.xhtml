@@ -1,0 +1,45 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+                xmlns:components="http://java.sun.com/jsf/composite/components" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="module-content">
+        <h:form style="margin:20px;">
+            <div class="new-btn">
+                <p:commandButton value="Adicionar" partialSubmit="true"
+                                 action="insert" inmediate="true"
+                                 icon="fa fa-plus" process="@this"/>
+            </div>
+
+            <components:person-datatable
+                    list="#{clienteView.list}" filteredList="#{clienteView.filtered}"
+                    editActionListenerTarget="#{clienteSaveView.cliente}"
+                    deleteAction="#{clienteView.deleteAction}"
+                    deleteActionListenerTarget="#{clienteView.c}"
+                    showViewBtn="true" updateOnView="@(.details)" />
+        </h:form>
+        <p:dialog header="Detalles del cliente" closeOnEscape="true"
+                  widgetVar="dialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel styleClass="details" style="text-align:center;">
+                <p:panelGrid  columns="2" rendered="#{clienteView.c != null}" columnClasses="label,value">
+                    <f:facet name="header">
+                        <p:graphicImage name="client.png" library="images"/>
+                    </f:facet>
+
+                    <h:outputText value="Id:" />
+                    <h:outputText value="#{clienteView.c.id}" />
+
+                    <h:outputText value="Nombre:" />
+                    <h:outputText value="#{clienteView.c.nombre}" />
+
+                    <h:outputText value="Apellidos:" />
+                    <h:outputText value="#{clienteView.c.apellidos}" />
+
+                    <h:outputText value="Observación:" />
+                    <h:outputText value="#{clienteView.c.obervaciones}" />
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

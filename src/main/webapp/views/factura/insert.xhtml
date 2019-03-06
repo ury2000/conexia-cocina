@@ -1,0 +1,122 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="module-content">
+
+        <h:form id="clientForm" style="margin: 15px;">
+            <h:panelGroup layout="block" styleClass="ui-g factura-grid process-me">
+                <div class="ui-g-3">
+                    <p:outputLabel value="Cliente:" for="cliente"/>
+                    <p:selectOneMenu id="cliente" value="#{facturaView.factura.cliente}"
+                                     converter="omnifaces.SelectItemsConverter"
+                                     var="c1" lazy="true" required="true">
+                        <f:selectItem itemLabel="Selecicone" itemValue=""/>
+                        <f:selectItems value="#{facturaView.clientes}" var="c"
+                                       itemLabel="#{c.fullName}" itemValue="#{c}"/>
+
+                        <p:column>
+                            <p:graphicImage width="16" name="client.png" library="images"/>
+                        </p:column>
+                        <p:column>
+                            #{c1.fullName}
+                        </p:column>
+                    </p:selectOneMenu>
+                    <p:message for="cliente" display="tooltip"/>
+                </div>
+                <div class="ui-g-3">
+                    <p:outputLabel value="Camarero:" for="camarero"/>
+                    <p:selectOneMenu id="camarero" required="true" lazy="true"
+                                     value="#{facturaView.factura.camarero}"
+                                     converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemLabel="Selecicone" itemValue=""/>
+                        <f:selectItems value="#{facturaView.camareros}" var="c"
+                                       itemLabel="#{c.fullName}" itemValue="#{c}"/>
+                    </p:selectOneMenu>
+                    <p:message for="camarero" display="tooltip"/></div>
+                <div class="ui-g-3">
+                    <p:outputLabel value="Mesa:" for="mesa"/>
+                    <p:selectOneMenu id="mesa" required="true" lazy="true"
+                                     value="#{facturaView.factura.mesa}"
+                                     converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemLabel="Selecicone" itemValue=""/>
+                        <f:selectItems value="#{facturaView.mesas}" var="m"
+                                       itemLabel="#{m.ubicacion}" itemValue="#{m}"/>
+                    </p:selectOneMenu>
+                    <p:message for="mesa" display="tooltip"/>
+                </div>
+                <div class="ui-g-3">
+                    <p:outputLabel for="fecha" value="Fecha:"/>
+                    <p:calendar id="fecha" value="#{facturaView.factura.fechaFactura}" required="true"/>
+                    <p:message for="fecha" display="tooltip"/>
+                </div>
+            </h:panelGroup>
+            <p:fieldset legend="Platos" toggleable="true" style="margin: 25px;">
+                <div class="ui-g factura-grid">
+                    <div class="ui-g-4">
+                        <p:outputLabel value="Cocinero:" for="coc"/>
+                        <p:selectOneMenu id="coc" lazy="true" required="true"
+                                         value="#{facturaView.detalleFactura.cocinero}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Selecicone" itemValue=""/>
+                            <f:selectItems value="#{facturaView.cocineros}" var="c"
+                                           itemLabel="#{c.fullName}" itemValue="#{c}"/>
+                        </p:selectOneMenu>
+                        <p:message for="coc" display="tooltip"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel value="Plato:" for="plato"/>
+                        <p:inputText value="#{facturaView.detalleFactura.plato}" required="true" id="plato"/>
+                        <p:message for="plato" display="tooltip"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:outputLabel value="Importe:" for="imp"/>
+                        <p:inputNumber id="imp" value="#{facturaView.detalleFactura.importe}" symbol="$"
+                                       symbolPosition="s" emptyValue="zero" minValue="0" decimalPlaces="1"
+                                       decimalSeparator="." thousandSeparator=",">
+                        </p:inputNumber>
+
+                        <p:commandButton value="Agregar" style="float: right;"
+                                         actionListener="#{facturaView.addPlato}"
+                                         icon="fa fa-plus" title="Agregar plato" styleClass="transparent"
+                                         process="@(.ui-fieldset :input)" update="@(.ui-fieldset :input) platosTable">
+                        </p:commandButton>
+                    </div>
+                </div>
+
+                <p:dataTable emptyMessage="No hay platos digilenciados" id="platosTable"
+                             value="#{facturaView.factura.detalleFacturas}"
+                             var="df" scrollable="true" scrollHeight="150"
+                             style="margin: 10px 7px">
+
+                    <p:column headerText="Cocinero">
+                        <h:outputText value="#{df.cocinero.fullName}"/>
+                    </p:column>
+                    <p:column headerText="Plato">
+                        <h:outputText value="#{df.plato}"/>
+                    </p:column>
+                    <p:column headerText="Importe">
+                        <h:outputText value="#{df.importe}"/>
+                    </p:column>
+                    <p:column width="30">
+                        <p:commandButton update="@parent:@parent"
+                                         icon="fa fa-trash" process="@this"
+                                         actionListener="#{facturaView.removePlato(df)}">
+                        </p:commandButton></p:column>
+                </p:dataTable>
+            </p:fieldset>
+            <div class="save-buttons" style="margin: auto 25px;">
+                <p:commandButton value="Guardar"
+                                 actionListener="#{facturaView.guardar}"
+                                 icon="fa fa-save" update="@form" process="@(.process-me :input) @this"/>
+                <h:link outcome="index">
+                    <span class="fa fa-backward"/>
+                    <span>Regresar</span>
+                </h:link>
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

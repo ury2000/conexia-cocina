@@ -1,0 +1,211 @@
+@CHARSET "UTF-8";
+
+.zero{
+    color: #d83c3c;
+}
+
+.factura-grid label {
+    display: block;
+    margin: 5px 5px 10px 5px;
+}
+
+.ui-selectonemenu-filter-container {
+    width: 100%;
+}
+
+.ui-selectonemenu-filter-container .ui-icon.ui-icon-search {
+    margin-right: 3px;
+}
+
+.ui-selectonemenu-item {
+    border: none !important;
+}
+
+.ui-selectonemenu-item td {
+    border-style: none !important;
+}
+
+.ui-module-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 10px 3px rgb(148, 145, 139);
+    /* border: 1px solid rgba(182, 176, 248, 1); */
+    padding: 20px;
+    margin: 15px auto;
+    width: 95%;
+}
+
+.module-content .ui-messages {
+    margin: auto 20px;
+    /*padding-left: 6px;*/
+    /*background: #558c55;*/
+    /*border-radius: 3px;*/
+}
+
+.module-content .ui-messages .ui-messages-info {
+    /*border-bottom-left-radius: 0;*/
+    /*border-top-left-radius: 0;*/
+    /*border-left: 6px solid yellowgreen;*/
+    background: #558c55;
+}
+
+.save-buttons {
+    margin: auto 20px;
+    min-height: 15px;
+}
+
+.save-buttons a {
+    float: left;
+    color: #49687d;
+}
+
+.save-buttons button {
+    float: right;
+}
+
+.delete-btn {
+    /*background: #c73333 !important;*/
+    /*border-color: #f1a4a4 !important;*/
+    color: #bf5d5d !important;
+}
+
+td .ui-button, td button.ui-button.ui-state-default, td .ui-button.ui-state-default, button.transparent {
+    border: none;
+    background: transparent;
+    color: #0e3552;
+}
+
+.new-btn {
+    margin: 10px auto;
+    text-align: right
+}
+
+.new-table {
+    padding: 15px;
+    text-align: left;
+}
+
+.new-btn button {
+    box-shadow: 0 2px 3px #5b5e5e;
+}
+
+.ui-datatable-odd {
+    background-color: #f7fcff;
+}
+
+.global-filter {
+    font-size: 12px !important;
+    color: #555;
+    margin: 2px;
+}
+
+.ui-paginator {
+    font-size: 14px;
+    color: #555;
+}
+
+.ui-menuitem-icon {
+    font-size: 12px;
+    margin-top: 1.2px;
+}
+
+.header {
+    background: none repeat scroll 0 0 #FFFFFF;
+    /*border-bottom: 1px solid #0162B1;*/
+    height: 60px;
+    box-shadow: 2px 2px 9px 0px #172731;
+}
+
+.menu-content {
+    float: right;
+    height: 30px;
+}
+
+.ui-menubar {
+    height: 100%;
+    display: inline-flex;
+    border: none;
+}
+
+.logo {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 32%, #DEDEDE 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 60px;
+}
+
+.img_logo {
+    width: 130px;
+    margin-left: 20px;
+    height: 62px;
+}
+
+.grafica {
+    float: left;
+    height: 60px;
+    width: 256px;
+}
+
+.module-header {
+    background: #006699;
+    color: white;
+    font-size: 18px;
+    padding: 12px 15px;
+}
+
+.module-header .fa {
+    margin-right: 3px;
+    font-size: 16px;
+}
+
+.module-content {
+    padding: .5em 1em;
+}
+
+body {
+    /*background: #dae4ed;*/
+    background: #4242425c;
+    margin: 0;
+}
+
+/*Sitkcy footer*/
+html, body {
+    height: 100%;
+}
+
+.page-wrap {
+    height: auto;
+    margin: 0 auto 0;
+    border: 0px !important;
+    /*background-color: #D7D7D8;*/
+    border-radius: 0px;
+}
+
+/*.page-content {*/
+/*min-height: 96.3%;*/
+/*background-color: #D7D7D8;*/
+/*}*/
+
+/** Responsive Desing **/
+/*@media only screen and (min-height: 575px) and (max-height: 615px) {*/
+/*.page-content {*/
+/*min-height: 94%;*/
+/*}*/
+/*}*/
+
+/*@media only screen and (min-height: 616px) and (max-height: 624px) {*/
+/*.page-content {*/
+/*min-height: 94.3%;*/
+/*}*/
+/*}*/
+
+/*@media only screen and (min-height: 625px) and (max-height: 649px) {*/
+/*.page-content {*/
+/*min-height: 94.4%;*/
+/*}*/
+/*}*/
+
+/*@media only screen and (min-height: 650px) {*/
+/*.page-content {*/
+/*min-height: 96.2%;*/
+/*}*/
+/*}*/

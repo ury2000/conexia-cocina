@@ -1,0 +1,47 @@
+<ui:component xmlns=""
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:cc="http://java.sun.com/jsf/composite" xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <cc:interface>
+        <cc:attribute name="tittle" required="true"/>
+        <cc:attribute name="person" required="true" type="com.conexia.examen.factura.domain.AbstractPerson"/>
+        <cc:attribute name="saveAction" required="true" method-signature="java.lang.String action()"/>
+        <cc:attribute name="goBack" type="java.lang.String" default="index"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:form style="margin: 20px">
+            <p:panelGrid columns="4" layout="grid" styleClass="new-table">
+                <f:facet name="header">
+                    <div style="text-align: left;padding: 5px;">
+                        <span>#{cc.attrs.tittle}</span></div>
+                </f:facet>
+
+                <p:outputLabel for="id" value="ID"/>
+                <p:outputLabel for="name" value="Nombre"/>
+                <p:outputLabel for="lastname1" value="1er Apellido"/>
+                <p:outputLabel for="lastname2" value="2do Apellido"/>
+
+                <p:inputText id="id" value="#{cc.attrs.person.id}" disabled="true"/>
+                <p:inputText id="name" value="#{cc.attrs.person.nombre}" required="true"/>
+                <p:inputText id="lastname1" value="#{cc.attrs.person.apellido1}" required="true"/>
+                <p:inputText id="lastname2" value="#{cc.attrs.person.apellido2}" required="true"/>
+
+                <h:inputHidden value="#{cc.attrs.person.id}"/>
+                <p:message for="name" display="tooltip"/>
+                <p:message for="lastname1" display="tooltip"/>
+                <p:message for="lastname2" display="tooltip"/>
+            </p:panelGrid>
+            <div class="save-buttons">
+                <p:commandButton value="Guardar"
+                                 action="#{cc.attrs.saveAction}"
+                                 icon="fa fa-save" update="@form" process="@form"/>
+                <h:link outcome="#{cc.attrs.goBack}">
+                    <span class="fa fa-backward"/>
+                    <span>Regresar</span>
+                </h:link>
+            </div>
+        </h:form>
+    </cc:implementation>
+</ui:component>

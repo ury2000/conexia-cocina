@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <persistence-unit name="FacturaPU" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/FacturaDS</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/factura"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+        </properties>
+        <!--<class>com.conexia.examen.i18n.domain.Camarero</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.Cliente</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.Cocinero</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.DetalleFactura</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.DetalleFacturaPK</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.Factura</class>-->
+        <!--<class>com.conexia.examen.i18n.domain.Mesa</class>-->
+        <!--<properties>-->
+            <!--<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/i18n"/>-->
+            <!--<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>-->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>-->
+            <!--<property name="hibernate.connection.username" value="postgres"/>-->
+            <!--<property name="hibernate.connection.password" value="postgres"/>
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/i18n" />
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+        </properties>-->
+    </persistence-unit>
+</persistence>

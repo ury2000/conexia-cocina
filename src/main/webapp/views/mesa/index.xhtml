@@ -1,0 +1,88 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="module-content">
+        <h:form style="margin:20px;" prependId="false">
+            <div class="new-btn">
+                <p:commandButton value="Adicionar" partialSubmit="true"
+                                 inmediate="true" update="@(.details)"
+                                 oncomplete="PF('dialog').show()"
+                                 resetValues="true" actionListener="#{mesaView.reset}"
+                                 icon="fa fa-plus" process="@this" />
+            </div>
+
+            <p:dataTable id="mesaTable" styleClass="mesaTable"
+                         value="#{mesaView.list}" filteredValue="#{mesaView.filtered}"
+                         var="m" paginator="true" paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                         rowsPerPageTemplate="5,10,15" rows="10" widgetVar="mTable" pageLinks="3">
+
+                <p:column headerText="ID" width="50">
+                    <h:outputText value="#{m.idMesa}"/>
+                </p:column>
+                <p:column headerText="Ubicacion" filterBy="#{m.ubicacion}" filterStyle="display: none">
+                    <h:outputText value="#{m.ubicacion}"/>
+                </p:column>
+
+                <p:column headerText="Max. Comensales" filterBy="#{m.numMaxComensales}" filterStyle="display: none">
+                    <h:outputText value="#{m.numMaxComensales}"/>
+                </p:column>
+
+                <p:column headerText="" width="80">
+                    <p:commandButton icon="fa fa-edit" title="Actualizar" process="@this" update="@(.details)"
+                                     onclick="PF('dialog').show()">
+                        <f:setPropertyActionListener value="#{m}"
+                                                     target="#{mesaView.m}"/>
+                    </p:commandButton>
+                    <p:commandButton actionListener="#{mesaView.deleteAction(m)}" process="@this" update="mesaTable"
+                                     icon="fa fa-trash" title="Eliminar" styleClass="delete-btn">
+                        <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar?" icon="fa fa-trash"/>
+                    </p:commandButton></p:column>
+
+                <f:facet name="paginatorBottomRight">
+                    <p:outputPanel styleClass="global-filter">
+                        <span>Buscar: </span>
+                        <p:inputText id="globalFilter" onkeyup="PF('mTable').filter()"
+                                     style="width:50px"/>
+                    </p:outputPanel>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="Formulario de mesa" closeOnEscape="true" width="700px"
+                  widgetVar="dialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel styleClass="details" style="text-align:center;">
+                <h:form> <p:panelGrid columns="3" layout="grid" styleClass="new-table">
+                    <f:facet name="header">
+                        <div style="text-align: left;padding: 5px;">
+                            <span>#{mesaView.tittle}</span></div>
+                    </f:facet>
+
+                    <p:outputLabel for="idMesa" value="Id:"/>
+                    <p:outputLabel for="ubic" value="Ubicación:"/>
+                    <p:outputLabel for="maxComen" value="Max. Comensales:"/>
+
+                    <p:inputText id="idMesa" disabled="true" value="#{mesaView.m.idMesa}" required="true"/>
+                    <p:inputText id="ubic" value="#{mesaView.m.ubicacion}" required="true"/>
+                    <p:inputText id="maxComen" value="#{mesaView.m.numMaxComensales}" required="true"/>
+
+                    <h:inputHidden value="#{mesaView.m.idMesa}"/>
+                    <p:message for="ubic" display="tooltip"/>
+                    <p:message for="maxComen" display="tooltip"/>
+                </p:panelGrid>
+
+
+                    <div style="text-align: center;margin: 20px;">
+                        <p:commandButton value="Guardar"
+                                         action="#{mesaView.guardar}"
+                                         icon="fa fa-save" update="@form @(.mesaTable)" process="@form"/>
+
+                    </div>
+                </h:form>
+            </p:outputPanel>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

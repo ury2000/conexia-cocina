@@ -1,0 +1,50 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="module-content">
+
+        <h:form style="margin: 20px">
+            <p:panelGrid columns="4" layout="grid" styleClass="new-table">
+                <f:facet name="header">
+                    <div style="text-align: left;padding: 5px;">
+                        <span>#{clienteSaveView.tittle}</span></div>
+                </f:facet>
+
+                <p:outputLabel for="id" value="ID"/>
+                <p:outputLabel for="name" value="Nombre"/>
+                <p:outputLabel for="lastname1" value="1er Apellido"/>
+                <p:outputLabel for="lastname2" value="2do Apellido"/>
+
+                <p:inputText id="id" value="#{clienteSaveView.cliente.nombre}" disabled="true"/>
+                <p:inputText id="name" value="#{clienteSaveView.cliente.nombre}" required="true"/>
+                <p:inputText id="lastname1" value="#{clienteSaveView.cliente.apellido1}" required="true"/>
+                <p:inputText id="lastname2" value="#{clienteSaveView.cliente.apellido2}" required="true"/>
+
+                <h:inputHidden value="#{clienteSaveView.cliente.id}"/>
+                <p:message for="name" display="tooltip"/>
+                <p:message for="lastname1" display="tooltip"/>
+                <p:message for="lastname2" display="tooltip"/>
+                <f:facet name="footer">
+                    <div style="font-weight: normal;margin: 10px auto">
+                        <p:outputLabel for="obs" value="Obervaciones"/></div>
+                    <div style="margin: 15px auto;display: flex;">
+                        <p:inputTextarea id="obs" value="#{clienteSaveView.cliente.obervaciones}"
+                                         style="width: 100%;"/>
+                    </div>
+                </f:facet>
+            </p:panelGrid>
+            <div class="save-buttons">
+                <p:commandButton value="Guardar"
+                                 action="#{clienteSaveView.guardar}"
+                                 icon="fa fa-save" update="@form" process="@form"/>
+                <h:link outcome="index">
+                    <span class="fa fa-backward"/>
+                    <span>Regresar</span>
+                </h:link>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

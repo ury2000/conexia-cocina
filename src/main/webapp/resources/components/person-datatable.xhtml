@@ -1,0 +1,72 @@
+<ui:component xmlns=""
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:cc="http://java.sun.com/jsf/composite" xmlns:p="http://primefaces.org/ui"
+              xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <cc:interface>
+        <cc:attribute name="list" required="true"/>
+        <cc:attribute name="filteredList" required="true"/>
+        <cc:attribute name="editActionListenerTarget" required="true"/>
+        <cc:attribute name="deleteActionListenerTarget" required="true"/>
+        <cc:attribute name="deleteAction"
+                      method-signature="java.lang.String deleteAction()"/>
+        <!--View Btn -->
+        <cc:attribute name="showViewBtn" default="false" type="java.lang.Boolean"/>
+        <cc:attribute name="updateOnView" default="@none"/>
+        <cc:attribute name="dialogJS" default="PF('dialog').show()"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <p:dataTable id="personTable"
+                     value="#{cc.attrs.list}" filteredValue="#{cc.attrs.filteredList}"
+                     var="f" paginator="true" paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                     rowsPerPageTemplate="5,10,15" rows="10" widgetVar="cTable" pageLinks="3">
+
+            <p:column headerText="ID" width="135">
+                <h:outputText value="#{f.id}"/>
+            </p:column>
+            <p:column headerText="Nombre" filterBy="#{f.nombre}" filterStyle="display: none">
+                <h:outputText value="#{f.nombre}"/>
+            </p:column>
+
+            <p:column headerText="1er. Apellido" filterBy="#{f.apellido1}" filterStyle="display: none">
+                <h:outputText value="#{f.apellido1}"/>
+            </p:column>
+
+            <p:column headerText="2do. Apellido" filterBy="#{f.apellido2}" filterStyle="display: none">
+                <h:outputText value="#{f.apellido2}"/>
+            </p:column>
+            <p:column headerText="" width="#{cc.attrs.showViewBtn ? '120' : '80'}">
+                <p:commandButton rendered="#{cc.attrs.showViewBtn}"
+                                 update="#{cc.attrs.updateOnView}"
+                                 oncomplete="#{cc.attrs.dialogJS}"
+                                 icon="fa fa-search-plus" title="Ver">
+                    <f:setPropertyActionListener value="#{f}"
+                                                 target="#{cc.attrs.deleteActionListenerTarget}"/>
+                </p:commandButton>
+
+                <p:commandButton action="insert" icon="fa fa-edit" title="Actualizar" process="@this" update="@all">
+                    <f:setPropertyActionListener value="#{f}"
+                                                 target="#{cc.attrs.editActionListenerTarget}"/>
+                </p:commandButton>
+                <p:commandButton action="#{cc.attrs.deleteAction}" process="@this" update="personTable"
+                                 icon="fa fa-trash" title="Eliminar" styleClass="delete-btn">
+                    <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar?" icon="fa fa-trash"/>
+                    <f:setPropertyActionListener value="#{f}" target="#{cc.attrs.deleteActionListenerTarget}"/>
+                </p:commandButton>
+
+
+            </p:column>
+            <f:facet name="paginatorBottomRight">
+                <p:outputPanel styleClass="global-filter">
+                    <span>Buscar: </span>
+                    <p:inputText id="globalFilter" onkeyup="PF('cTable').filter()"
+                                 style="width:150px"/>
+                </p:outputPanel>
+            </f:facet>
+        </p:dataTable>
+    </cc:implementation>
+
+</ui:component>

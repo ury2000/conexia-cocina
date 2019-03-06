@@ -1,0 +1,22 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+                xmlns:components="http://java.sun.com/jsf/composite/components">
+
+    <ui:define name="module-content">
+        <h:form style="margin:20px;">
+            <div class="new-btn">
+                <p:commandButton value="Adicionar" partialSubmit="true"
+                                 action="insert" inmediate="true"
+                                 icon="fa fa-plus" process="@this"/>
+            </div>
+
+            <components:person-datatable
+                    list="#{camareroView.list}" filteredList="#{camareroView.filtered}"
+                    editActionListenerTarget="#{camareroSaveView.camarero}"
+                    deleteAction="#{camareroView.deleteAction}"
+                    deleteActionListenerTarget="#{camareroView.c}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

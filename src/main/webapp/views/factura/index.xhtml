@@ -1,0 +1,94 @@
+<ui:composition template="_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="module-content">
+        <!--<directive.include xmlns="http://java.sun.com/JSP/Page" file="insert.xhtml"/>-->
+
+        <h:form style="margin:20px;">
+            <div class="new-btn">
+                <p:commandButton value="Adicionar" partialSubmit="true"
+                                 action="insert" inmediate="true"
+                                 icon="fa fa-plus" process="@this"/>
+            </div>
+
+
+            <p:tabView cache="true" dynamic="true">
+                <p:tab title="Camareros por mes">
+                    <p:dataTable id="camarerosTable"
+                                 value="#{facturaView.facturasMes}" filteredValue="#{facturaView.filteredFalturaMES}"
+                                 var="mes" paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                                 rowsPerPageTemplate="5,10,15" rows="10" widgetVar="fTable" pageLinks="3"
+                                 rowStyleClass="#{mes.sum le 0  or mes.sum == null ? 'zero' : null}">
+
+                        <p:column headerText="Nombre" sortBy="#{mes.fullName}"
+                                  filterBy="#{mes.fullName}" filterStyle="display: none">
+                            <h:outputText value="#{mes.fullName}"/>
+                        </p:column>
+                        <p:column headerText="Mes" sortBy="#{mes.mes}"
+                                  filterBy="#{mes.mes}" filterStyle="display: none">
+                            <h:outputText value="#{mes.mes}" converter="mesConverter"/>
+                        </p:column>
+
+                        <p:column headerText="Total. Facturado" sortBy="#{mes.sum}"
+                                  filterBy="#{mes.sum}" filterStyle="display: none">
+                            <h:outputText value="#{mes.sum == null ? '$0.00' : mes.sum}">
+                                <f:convertNumber currencySymbol="$" type="currency"
+                                                 minFractionDigits="2"/></h:outputText>
+                        </p:column>
+
+                        <f:facet name="paginatorBottomRight">
+                            <p:outputPanel styleClass="global-filter">
+                                <span>Buscar: </span>
+                                <p:inputText id="globalFilter" onkeyup="PF('fTable').filter()"
+                                             style="width:150px"/>
+                            </p:outputPanel>
+                        </f:facet>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="Clientes que pagaron más de $100 000">
+                    <p:dataTable id="fTable"
+                                 value="#{facturaView.facturaDTOs}" filteredValue="#{facturaView.filteredFacturaDTOs}"
+                                 var="f" paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                                 rowsPerPageTemplate="5,10,15" rows="10" widgetVar="fTable" pageLinks="3">
+
+                        <p:column headerText="Nombre" sortBy="#{f.nombre}"
+                                  filterBy="#{f.nombre}" filterStyle="display: none">
+                            <h:outputText value="#{f.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Apellidos" sortBy="#{f.apellidos}"
+                                  filterBy="#{f.apellidos}" filterStyle="display: none">
+                            <h:outputText value="#{f.apellidos}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Total. Facturado" sortBy="#{f.importe}"
+                                  filterBy="#{f.importe}" filterStyle="display: none">
+                            <h:outputText value="#{f.importe}">
+                                <f:convertNumber currencySymbol="$" type="currency" minFractionDigits="2"/>
+
+                            </h:outputText>
+                        </p:column>
+
+                        <f:facet name="paginatorBottomRight">
+                            <p:outputPanel styleClass="global-filter">
+                                <span>Buscar: </span>
+                                <p:inputText id="globalFilter" onkeyup="PF('fTable').filter()"
+                                             style="width:150px"/>
+                            </p:outputPanel>
+                        </f:facet>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
